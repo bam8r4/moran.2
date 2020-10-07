@@ -6,6 +6,8 @@ using namespace std;
 
 int main()
 {
+
+	char *const parmList[] = {"./", NULL};
 	cout << "Hello world" << endl;
 
 	int counter = 0;
@@ -13,6 +15,7 @@ int main()
 
     if (pid == 0)
     {
+			  execvp("helper.cpp",paramList);
         // child process
         int i = 0;
         for (; i < 5; ++i)
