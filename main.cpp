@@ -7,7 +7,7 @@ using namespace std;
 int main()
 {
 
-	char *const parmList[] = {"./", NULL};
+	char *const paramList[] = {"./", NULL};
 	cout << "Hello world" << endl;
 
 	int counter = 0;
