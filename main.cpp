@@ -7,7 +7,7 @@ using namespace std;
 int main()
 {
 
-	char *argv[] = { NULL };;
+	char *argv[] = {"racecar", NULL };;
 	cout << "Hello world" << endl;
 
 	int counter = 0;
@@ -15,7 +15,7 @@ int main()
 
     if (pid == 0)
     {
-			  execvp("./program2",paramList);
+	execvp("./program2",argv);
         // child process
         int i = 0;
         for (; i < 5; ++i)
