@@ -15,14 +15,14 @@ using namespace std;
 int main(int argc, char **argv)
 {
 
- time_t *ptr = NULL;
+ int *ptr = NULL;
  int shmid = 0;
  key_t key = 0;
  key = 0x173600;
 
- shmid = shmget(key,sizeof(time_t),0678|IPC_CREAT);
- ptr = (time_t *) shmat(shmid,(void*)0,0);
- *ptr = time(NULL);
+ shmid = shmget(key,sizeof(int),0678|IPC_CREAT);
+ ptr = (int *) shmat(shmid,(void*)0,0);
+ *ptr = 12255;
 
  int maxNumChildren = 4;
  int concurrentChildren = 2;
