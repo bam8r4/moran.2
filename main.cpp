@@ -14,13 +14,13 @@ using namespace std;
 int main(int argc, char **argv)
 {
 
- int *ptr = NULL;
+ clock_t *ptr = NULL;
  int shmid = 0;
  key_t key = 0;
  key = 0x173686;
 
- shmid = shmget(key,sizeof(int),0666|IPC_CREAT);
- ptr = (int *) shmat(shmid,(void*)0,0);
+ shmid = shmget(key,sizeof(clock_t),0666|IPC_CREAT);
+ ptr = (clock_t *) shmat(shmid,(void*)0,0);
  *ptr = clock();
 
  int maxNumChildren = 4;
