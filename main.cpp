@@ -4,11 +4,24 @@
 #include <getopt.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctime>
+#include <sys/types.h>
+#include <sys/ipc.h>
+#include <sys/shm.h>
 
 using namespace std;
 
 int main(int argc, char **argv)
 {
+
+ int *ptr = NULL;
+ int shmid = 0;
+ key_t key = 0;
+ key = 0x173686;
+
+ shmid = shmget(key,sizeof(int),0666|IPC_CREAT);
+ ptr = (int *) shmat(shmid,(void*)0,0);
+ *ptr = clock();
 
  int maxNumChildren = 4;
  int concurrentChildren = 2;
@@ -36,13 +49,14 @@ int main(int argc, char **argv)
       return 1;
      } //end block for switch
    }  //end block for while
-	
+
 	fileName = argv[argc-1];
 
 	cout<<"Max num childrens "<<maxNumChildren<<endl;
 	cout<<"Max concurrent "<<concurrentChildren<<endl;
 	cout<<"Max time "<<maxTimeSeconds<<endl;
 	cout<<"Input file name "<<fileName<<endl;
+	cout<<"Clock "<< *ptr <<endl;
 
 	char *argvars[] = {"racecar", NULL };;
 	cout << "Hello world" << endl;
@@ -77,6 +91,9 @@ int main(int argc, char **argv)
     }
 
     printf("--end of program--\n");
+
+		shmdt((void *) ptr);
+    shmctl(shmid, IPC_RMID, NULL);
 
     return 0;
 
