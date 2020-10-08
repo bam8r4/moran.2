@@ -15,14 +15,25 @@ using namespace std;
 int main(int argc, char **argv)
 {
 
- int *ptr = NULL;
- int shmid = 0;
- key_t key = 0;
- key = 0x173600;
+// int *ptr = NULL;
+// int shmid = 0;
+// key_t key = 0;
+// key = 0x173600;
 
+
+/*
  shmid = shmget(key,sizeof(int),0666|IPC_CREAT);
  ptr = (int *) shmat(shmid,(void*)0,0);
  *ptr = 12255;
+*/
+
+
+ key_t key = 13933; 
+ int shmid = shmget(key,sizeof(int),0666|IPC_CREAT); 
+ int *ptr = (int*) shmat(shmid,(void*)0,0);
+
+ *ptr = 9;
+
 
  int maxNumChildren = 4;
  int concurrentChildren = 2;
@@ -57,7 +68,7 @@ int main(int argc, char **argv)
 	cout<<"Max concurrent "<<concurrentChildren<<endl;
 	cout<<"Max time "<<maxTimeSeconds<<endl;
 	cout<<"Input file name "<<fileName<<endl;
-	cout<<"Clock "<< *ptr <<endl;
+	cout<<"Clock "<< ptr<<" "<<*ptr <<endl;
 
 	char *argvars[] = {"racecar", NULL };;
 	cout << "Hello world" << endl;

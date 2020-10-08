@@ -5,3 +5,6 @@ program1: main.cpp
 
 program2: helper.cpp
 	g++ -o program2 helper.cpp
+clean:
+	rm program1
+	rm program2
