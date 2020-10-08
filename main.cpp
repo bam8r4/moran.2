@@ -15,21 +15,8 @@ using namespace std;
 int main(int argc, char **argv)
 {
 
-// int *ptr = NULL;
-// int shmid = 0;
-// key_t key = 0;
-// key = 0x173600;
-
-
-/*
- shmid = shmget(key,sizeof(int),0666|IPC_CREAT);
- ptr = (int *) shmat(shmid,(void*)0,0);
- *ptr = 12255;
-*/
-
-
- key_t key = 13933; 
- int shmid = shmget(key,sizeof(int),0666|IPC_CREAT); 
+ key_t key = 13933;
+ int shmid = shmget(key,sizeof(int),0666|IPC_CREAT);
  int *ptr = (int*) shmat(shmid,(void*)0,0);
 
  *ptr = 9;
@@ -74,33 +61,39 @@ int main(int argc, char **argv)
 	cout << "Hello world" << endl;
 
 	int counter = 0;
-    pid_t pid = fork();
+	int curProcessCount = 0;
+	int maxProcessCount = 0;
+  pid_t pid;
+	while(maxProcessCount <= maxNumChildren)
+	{
+		  while(curProcessCount >= concurrentChildren)
+			{
+				wait();
 
-    if (pid == 0)
-    {
-	execvp("./program2",argvars);
-        // child process
-        int i = 0;
-        for (; i < 5; ++i)
-        {
-            printf("child process: counter=%d\n", ++counter);
-        }
-    }
-    else if (pid > 0)
-    {
-        // parent process
-        int j = 0;
-        for (; j < 5; ++j)
-        {
-            printf("parent process: counter=%d\n", ++counter);
-        }
-    }
-    else
-    {
-        // fork failed
-        printf("fork() failed!\n");
-        return 1;
-    }
+			}
+			if(curProcessCount < concurrentChildren)
+			{
+				concurrentChildren += 1;
+				maxProcessCount += 1;
+				pid = fork();
+			}
+
+	    if (pid == 0)
+	    {	  //Make child;
+				  execvp("./program2",argvars);
+
+	    }
+	    else if (pid > 0)
+	    {
+	        // parent process
+	    }
+	    else
+	    {
+	        // fork failed
+	        printf("fork() failed!\n");
+	        return 1;
+	    }
+	}
 
     printf("--end of program--\n");
 
