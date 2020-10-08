@@ -20,7 +20,7 @@ int main(int argc, char **argv)
  key_t key = 0;
  key = 0x173600;
 
- shmid = shmget(key,sizeof(int),0678|IPC_CREAT);
+ shmid = shmget(key,sizeof(int),0666|IPC_CREAT);
  ptr = (int *) shmat(shmid,(void*)0,0);
  *ptr = 12255;
 

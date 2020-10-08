@@ -24,7 +24,7 @@ int main(int argc,char *argv[])
 
 
    //Return memory identifier.
-  shmid = shmget(key,sizeof(int),0678|IPC_CREAT);
+  shmid = shmget(key,sizeof(int),0666|IPC_CREAT);
   ptr = (int *) shmat(shmid,(void*)0,0);
 
 	string potPal = argv[0];
