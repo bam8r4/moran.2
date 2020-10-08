@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <getopt.h>
 #include <stdlib.h>
+#include <string.h>
 
 using namespace std;
 
@@ -12,6 +13,7 @@ int main(int argc, char **argv)
  int maxNumChildren = 4;
  int concurrentChildren = 2;
  int maxTimeSeconds = 100;
+ string fileName;
 
  int option_index = 0;
  char *user_name = NULL;
@@ -27,19 +29,22 @@ int main(int argc, char **argv)
 	     maxTimeSeconds = atoi(optarg);
 	     break;
 		 case 'h':
-	 		 printf("Printing usage:\n");
+	 		 cout<<"Usage: "<<argv[0]<<" [-n MaxNumber of children] [-s MaxNumber of concurrent processes] [-t MaxTime in seconds] InputFile"<<endl;
 			 return 0;
      default:
       printf("Incorrect options.\n");
       return 1;
      } //end block for switch
    }  //end block for while
+	
+	fileName = argv[argc-1];
 
 	cout<<"Max num childrens "<<maxNumChildren<<endl;
 	cout<<"Max concurrent "<<concurrentChildren<<endl;
 	cout<<"Max time "<<maxTimeSeconds<<endl;
+	cout<<"Input file name "<<fileName<<endl;
 
-	char *argv[] = {"racecar", NULL };;
+	char *argvars[] = {"racecar", NULL };;
 	cout << "Hello world" << endl;
 
 	int counter = 0;
@@ -47,7 +52,7 @@ int main(int argc, char **argv)
 
     if (pid == 0)
     {
-	execvp("./program2",argv);
+	execvp("./program2",argvars);
         // child process
         int i = 0;
         for (; i < 5; ++i)
