@@ -8,6 +8,7 @@
 #include <sys/types.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
+#include <time.h>
 
 
 using namespace std;
@@ -15,7 +16,7 @@ using namespace std;
 int main(int argc,char *argv[])
 {
 
-  clock_t *ptr = NULL;
+  time_t *ptr = NULL;
   int pid =0;
   int shmid = 0;
   key_t key = 0;
@@ -23,8 +24,8 @@ int main(int argc,char *argv[])
 
 
    //Return memory identifier.
-  shmid = shmget(key,sizeof(clock_t),0666|IPC_CREAT);
-  ptr = (clock_t *) shmat(shmid,(void*)0,0);
+  shmid = shmget(key,sizeof(time_t),0666|IPC_CREAT);
+  ptr = (time_t *) shmat(shmid,(void*)0,0);
 
 	string potPal = argv[0];
 	int length = 0;

@@ -8,20 +8,21 @@
 #include <sys/types.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
+#include <time.h>
 
 using namespace std;
 
 int main(int argc, char **argv)
 {
 
- clock_t *ptr = NULL;
+ time_t *ptr = NULL;
  int shmid = 0;
  key_t key = 0;
  key = 0x173686;
 
- shmid = shmget(key,sizeof(clock_t),0666|IPC_CREAT);
- ptr = (clock_t *) shmat(shmid,(void*)0,0);
- *ptr = clock();
+ shmid = shmget(key,sizeof(time_t),0666|IPC_CREAT);
+ ptr = (time_t *) shmat(shmid,(void*)0,0);
+ *ptr = time(NULL);
 
  int maxNumChildren = 4;
  int concurrentChildren = 2;
