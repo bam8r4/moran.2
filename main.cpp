@@ -18,9 +18,9 @@ int main(int argc, char **argv)
  time_t *ptr = NULL;
  int shmid = 0;
  key_t key = 0;
- key = 0x173686;
+ key = 0x173600;
 
- shmid = shmget(key,sizeof(time_t),0666|IPC_CREAT);
+ shmid = shmget(key,sizeof(time_t),0678|IPC_CREAT);
  ptr = (time_t *) shmat(shmid,(void*)0,0);
  *ptr = time(NULL);
 
