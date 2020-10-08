@@ -57,8 +57,7 @@ int main(int argc, char **argv)
 	cout<<"Input file name "<<fileName<<endl;
 	cout<<"Clock "<< ptr<<" "<<*ptr <<endl;
 
-	char *argvars[] = {"racecar", NULL };;
-	cout << "Hello world" << endl;
+	char *argvars[] = {"racecar", NULL };
 
 	int counter = 0;
 	int curProcessCount = 0;
