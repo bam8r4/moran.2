@@ -57,6 +57,17 @@ int main(int argc, char **argv)
 	cout<<"Input file name "<<fileName<<endl;
 	cout<<"Clock "<< ptr<<" "<<*ptr <<endl;
 
+	ifstream inFile
+
+	newfile.open(fileName,in); //open a file to perform read operation using file object
+   if (newfile.is_open()){   //checking whether the file is open
+      string tp;
+      while(getline(newfile, tp)){ //read data from file object and put it into string.
+         cout << tp << "\n"; //print the data of the string
+      }
+      newfile.close(); //close the file object.
+   }
+/*
 	char *argvars[] = {"racecar", NULL };
 
 	int counter = 0;
@@ -97,7 +108,7 @@ int main(int argc, char **argv)
     printf("--end of program--\n");
 
 		shmdt((void *) ptr);
-    shmctl(shmid, IPC_RMID, NULL);
+    shmctl(shmid, IPC_RMID, NULL);*/
 
     return 0;
 
