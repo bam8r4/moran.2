@@ -1,10 +1,13 @@
-all: program1 program2
+all: master palin
 
-program1: main.cpp
-	g++ -o program1 main.cpp
+master: main.cpp
+	g++ -o master main.cpp
 
-program2: helper.cpp
-	g++ -o program2 helper.cpp
+palin: helper.cpp
+	g++ -o palin helper.cpp
 clean:
-	rm program1
-	rm program2
+	rm master
+	rm palin
+	rm log.out
+	rm palin.out
+	rm nopalin.out

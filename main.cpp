@@ -92,13 +92,8 @@ int main(int argc, char **argv)
 		palindromes.push_back(str);
 	}
 
-	for(int i = 0; i < palindromes.size(); i++)
-	{
-		cout<<palindromes[i]<<endl;
-	}
 
-
-	char *argvars[] = {"racecar",NULL};
+	char *argvars[] = {NULL,NULL};
 	string tempString;
 	int counter = 0;
 	int curProcessCount = 0;
@@ -124,7 +119,7 @@ int main(int argc, char **argv)
 				  argvars[0] = (char *)tempString.c_str();
 					//argvars[1] = (char *)(maxProcessCount-1);
 
-				  execvp("./program2",argvars);
+				  execvp("./palin",argvars);
 
 	    }
 	    else if (pid > 0)
@@ -134,7 +129,7 @@ int main(int argc, char **argv)
 	    else
 	    {
 	        // fork failed
-	        printf("fork() failed!\n");
+	        perror("fork() failed!\n");
 	        return 1;
 	    }
 	}

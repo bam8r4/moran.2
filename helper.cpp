@@ -17,7 +17,7 @@ using namespace std;
 int main(int argc,char *argv[])
 {
 
-	key_t key = 13933;
+  key_t key = 13933;
   int shmid = shmget(key,sizeof(int),0666|IPC_CREAT);
   int *ptr = (int*) shmat(shmid,(void*)0,0);
 
@@ -36,6 +36,7 @@ int main(int argc,char *argv[])
             		break;
 		}
   	}
+
 
 	if(flag == 0)
 	{
@@ -57,7 +58,6 @@ int main(int argc,char *argv[])
     noPalLog << "Pid: "<<getpid()<<" String: "<<potPal<<"\n";
     noPalLog.close();
 	}
-
 
   exit(0);
 }
