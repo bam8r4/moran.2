@@ -9,6 +9,7 @@
 #include <sys/ipc.h>
 #include <sys/shm.h>
 #include <time.h>
+#include <fstream>
 
 
 using namespace std;
@@ -23,9 +24,6 @@ int main(int argc,char *argv[])
 	string potPal = argv[0];
 	int length = 0;
 	int flag = 0;
-
-	cout<<"Yo I am the new process! Time is: "<< ptr<<" "<<*ptr <<endl;
-
 
 	//cout<<"Here are some more values: "<<intptr<<" "<<*intptr<<endl;
 	length = potPal.length();

@@ -10,23 +10,34 @@
 #include <sys/shm.h>
 #include <time.h>
 #include <fstream>
+#include <vector>
 
 using namespace std;
 
 int main(int argc, char **argv)
 {
 
+ vector<string> palindromes;
+
+//Establishing shared memory
  key_t key = 13933;
  int shmid = shmget(key,sizeof(int),0666|IPC_CREAT);
  int *ptr = (int*) shmat(shmid,(void*)0,0);
 
  *ptr = 9;
 
-
+//Setting variables for command line arguments.
  int maxNumChildren = 4;
  int concurrentChildren = 2;
  int maxTimeSeconds = 100;
  string fileName;
+
+ if(argc < 2)
+ {
+	 cout<<"Usage: "<<argv[0]<<" [-n MaxNumber of children] [-s MaxNumber of concurrent processes] [-t MaxTime in seconds] InputFile"<<endl;
+	 cout<<"Defaults are as follows: MaxNumber of children = 4 Max concurrent processes = 2 Max time 100 seconds."<<endl;
+	 return 0;
+ }
 
  int option_index = 0;
  char *user_name = NULL;
@@ -43,6 +54,7 @@ int main(int argc, char **argv)
 	     break;
 		 case 'h':
 	 		 cout<<"Usage: "<<argv[0]<<" [-n MaxNumber of children] [-s MaxNumber of concurrent processes] [-t MaxTime in seconds] InputFile"<<endl;
+			 cout<<"Defaults are as follows: MaxNumber of children = 4 Max concurrent processes = 2 Max time 100 seconds."<<endl;
 			 return 0;
      default:
       printf("Incorrect options.\n");
@@ -52,23 +64,37 @@ int main(int argc, char **argv)
 
 	fileName = argv[argc-1];
 
-	cout<<"Max num childrens "<<maxNumChildren<<endl;
-	cout<<"Max concurrent "<<concurrentChildren<<endl;
-	cout<<"Max time "<<maxTimeSeconds<<endl;
-	cout<<"Input file name "<<fileName<<endl;
-	cout<<"Clock "<< ptr<<" "<<*ptr <<endl;
+	cout<<"\nMax num children: "<<maxNumChildren<<endl;
+	cout<<"Max concurrent processes: "<<concurrentChildren<<endl;
+	cout<<"Max time: "<<maxTimeSeconds<<endl;
+	cout<<"Input file name: "<<fileName<<endl;
 
 	ifstream inFile(fileName.c_str());
 	string str;
 
 	while(getline(inFile,str))
 	{
-		cout<<str<<endl;
-	} 
-   
-/*
-	char *argvars[] = {"racecar", NULL };
 
+		for (int i = 0, len = str.size(); i < len; i++)
+    {
+        if (ispunct(str[i]) || isspace(str[i]))
+        {
+            str.erase(i--, 1);
+            len = str.size();
+        }
+    }
+
+		palindromes.push_back(str);
+	}
+
+	/*for(int i = 0; i < palindromes.size(); i++)
+	{
+		cout<<palindromes[i]<<endl;
+	}*/
+
+
+	char *argvars[] = {NULL, NULL};
+	string tempString = NULL;
 	int counter = 0;
 	int curProcessCount = 0;
 	int maxProcessCount = 0;
@@ -77,7 +103,7 @@ int main(int argc, char **argv)
 	{
 		  while(curProcessCount >= concurrentChildren)
 			{
-				wait();
+				wait(1);
 
 			}
 			if(curProcessCount < concurrentChildren)
@@ -89,6 +115,8 @@ int main(int argc, char **argv)
 
 	    if (pid == 0)
 	    {	  //Make child;
+				  tempString = palindromes[maxProcessCount];
+					strncpy(argvars[0], tempString.c_str(), tempString.size());
 				  execvp("./program2",argvars);
 
 	    }
@@ -104,10 +132,9 @@ int main(int argc, char **argv)
 	    }
 	}
 
-    printf("--end of program--\n");
-
+		//Deleting shared memory
 		shmdt((void *) ptr);
-    shmctl(shmid, IPC_RMID, NULL);*/
+    shmctl(shmid, IPC_RMID, NULL);
 
     return 0;
 
