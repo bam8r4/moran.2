@@ -98,7 +98,7 @@ int main(int argc, char **argv)
 	}
 
 
-	char *argvars[] = {"racecar", NULL};
+	char *argvars[] = {"racecar","0",NULL};
 	string tempString;
 	int counter = 0;
 	int curProcessCount = 0;
@@ -122,7 +122,7 @@ int main(int argc, char **argv)
 	    {	  //Make child;
 				  tempString = palindromes[maxProcessCount-1];
 				  argvars[0] = (char *)tempString.c_str();
-
+					argvars[1] = (char *)(maxProcessCount-1);
 
 				  execvp("./program2",argvars);
 

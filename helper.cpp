@@ -39,25 +39,23 @@ int main(int argc,char *argv[])
 
 	if(flag == 0)
 	{
-    ofstream MyFile("palin.out");
-    MyFile << potPal<<"\n";
-    MyFile.close();
+    ofstream PalOut("palin.out");
+    PalOut << potPal<<"\n";
+    PalOut.close();
 
-    ofstream MyFile("log.out");
-    MyFile << "Pid: "<<getpid()<<" Index: "<<index<<" String: "<<potPal<<"\n";
-    MyFile.close();
-		cout<<potPal<<" is a palindrome"<<endl;
+    ofstream palLog("log.out");
+    palLog<< "Pid: "<<getpid()<<" Index: "<<index<<" String: "<<potPal<<"\n";
+    palLog.close();
 	}
 	else
 	{
-    ofstream MyFile("nopalin.out");
-    MyFile << potPal<<"\n";
-    MyFile.close();
+    ofstream noPalOut("nopalin.out");
+    noPalOut << potPal<<"\n";
+    noPalOut.close();
 
-    ofstream MyFile("log.out");
-    MyFile << "Pid: "<<getpid()<<" Index: "<<index<<" String: "<<potPal<<"\n";
-    MyFile.close();
-		cout<<potPal<<" is not a palindrome"<<endl;
+    ofstream noPalLog("log.out");
+    noPalLog << "Pid: "<<getpid()<<" Index: "<<index<<" String: "<<potPal<<"\n";
+    noPalLog.close();
 	}
 
 
