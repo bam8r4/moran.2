@@ -39,21 +39,21 @@ int main(int argc,char *argv[])
 
 	if(flag == 0)
 	{
-    ofstream PalOut("palin.out");
+    ofstream PalOut("palin.out", std::ofstream::out | std::ofstream::app);
     PalOut << potPal<<"\n";
     PalOut.close();
 
-    ofstream palLog("log.out");
+    ofstream palLog("log.out", std::ofstream::out | std::ofstream::app);
     palLog<< "Pid: "<<getpid()<<" String: "<<potPal<<"\n";
     palLog.close();
 	}
 	else
 	{
-    ofstream noPalOut("nopalin.out");
+    ofstream noPalOut("nopalin.out", std::ofstream::out | std::ofstream::app);
     noPalOut << potPal<<"\n";
     noPalOut.close();
 
-    ofstream noPalLog("log.out");
+    ofstream noPalLog("log.out", std::ofstream::out | std::ofstream::app);
     noPalLog << "Pid: "<<getpid()<<" String: "<<potPal<<"\n";
     noPalLog.close();
 	}
