@@ -22,7 +22,7 @@ int main(int argc,char *argv[])
   int *ptr = (int*) shmat(shmid,(void*)0,0);
 
 	string potPal = argv[0];
-  string index = argv[1];
+  //string index = argv[1];
 
 	int length = 0;
 	int flag = 0;
@@ -44,7 +44,7 @@ int main(int argc,char *argv[])
     PalOut.close();
 
     ofstream palLog("log.out");
-    palLog<< "Pid: "<<getpid()<<" Index: "<<index<<" String: "<<potPal<<"\n";
+    palLog<< "Pid: "<<getpid()<<" String: "<<potPal<<"\n";
     palLog.close();
 	}
 	else
@@ -54,7 +54,7 @@ int main(int argc,char *argv[])
     noPalOut.close();
 
     ofstream noPalLog("log.out");
-    noPalLog << "Pid: "<<getpid()<<" Index: "<<index<<" String: "<<potPal<<"\n";
+    noPalLog << "Pid: "<<getpid()<<" String: "<<potPal<<"\n";
     noPalLog.close();
 	}
 
