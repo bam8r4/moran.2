@@ -9,6 +9,7 @@
 #include <sys/ipc.h>
 #include <sys/shm.h>
 #include <time.h>
+#include <fstream>
 
 using namespace std;
 
@@ -57,16 +58,14 @@ int main(int argc, char **argv)
 	cout<<"Input file name "<<fileName<<endl;
 	cout<<"Clock "<< ptr<<" "<<*ptr <<endl;
 
-	ifstream inFile
+	ifstream inFile(fileName.c_str());
+	string str;
 
-	newfile.open(fileName,in); //open a file to perform read operation using file object
-   if (newfile.is_open()){   //checking whether the file is open
-      string tp;
-      while(getline(newfile, tp)){ //read data from file object and put it into string.
-         cout << tp << "\n"; //print the data of the string
-      }
-      newfile.close(); //close the file object.
-   }
+	while(getline(inFile,str))
+	{
+		cout<<str<<endl;
+	} 
+   
 /*
 	char *argvars[] = {"racecar", NULL };
 
