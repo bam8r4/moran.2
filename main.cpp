@@ -87,14 +87,14 @@ int main(int argc, char **argv)
 		palindromes.push_back(str);
 	}
 
-	/*for(int i = 0; i < palindromes.size(); i++)
+	for(int i = 0; i < palindromes.size(); i++)
 	{
 		cout<<palindromes[i]<<endl;
-	}*/
+	}
 
 
-	char *argvars[] = {NULL, NULL};
-	string tempString = NULL;
+	char *argvars[] = {"racecar", NULL};
+	string tempString;
 	int counter = 0;
 	int curProcessCount = 0;
 	int maxProcessCount = 0;
@@ -103,7 +103,7 @@ int main(int argc, char **argv)
 	{
 		  while(curProcessCount >= concurrentChildren)
 			{
-				wait(1);
+				wait();
 
 			}
 			if(curProcessCount < concurrentChildren)
@@ -115,8 +115,10 @@ int main(int argc, char **argv)
 
 	    if (pid == 0)
 	    {	  //Make child;
-				  tempString = palindromes[maxProcessCount];
-					strncpy(argvars[0], tempString.c_str(), tempString.size());
+				  tempString = palindromes[maxProcessCount-1];
+				  argvars[0] = (char *)tempString.c_str();
+				
+			
 				  execvp("./program2",argvars);
 
 	    }
