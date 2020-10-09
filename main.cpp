@@ -64,6 +64,11 @@ int main(int argc, char **argv)
 
 	fileName = argv[argc-1];
 
+	if(concurrentChildren > 20)
+	{
+		concurrentChildren = 20;
+	}
+
 	cout<<"\nMax num children: "<<maxNumChildren<<endl;
 	cout<<"Max concurrent processes: "<<concurrentChildren<<endl;
 	cout<<"Max time: "<<maxTimeSeconds<<endl;
@@ -117,8 +122,8 @@ int main(int argc, char **argv)
 	    {	  //Make child;
 				  tempString = palindromes[maxProcessCount-1];
 				  argvars[0] = (char *)tempString.c_str();
-				
-			
+
+
 				  execvp("./program2",argvars);
 
 	    }

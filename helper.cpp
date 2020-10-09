@@ -22,12 +22,12 @@ int main(int argc,char *argv[])
   int *ptr = (int*) shmat(shmid,(void*)0,0);
 
 	string potPal = argv[0];
+  string index = argv[1];
+
 	int length = 0;
 	int flag = 0;
 
-	//cout<<"Here are some more values: "<<intptr<<" "<<*intptr<<endl;
 	length = potPal.length();
-	cout<<length<<endl;
 
 	for(int i=0;i < length ;i++)
 	{
@@ -39,10 +39,24 @@ int main(int argc,char *argv[])
 
 	if(flag == 0)
 	{
+    ofstream MyFile("palin.out");
+    MyFile << potPal<<"\n";
+    MyFile.close();
+
+    ofstream MyFile("log.out");
+    MyFile << "Pid: "<<getpid()<<" Index: "<<index<<" String: "<<potPal<<"\n";
+    MyFile.close();
 		cout<<potPal<<" is a palindrome"<<endl;
 	}
 	else
 	{
+    ofstream MyFile("nopalin.out");
+    MyFile << potPal<<"\n";
+    MyFile.close();
+
+    ofstream MyFile("log.out");
+    MyFile << "Pid: "<<getpid()<<" Index: "<<index<<" String: "<<potPal<<"\n";
+    MyFile.close();
 		cout<<potPal<<" is not a palindrome"<<endl;
 	}
 
